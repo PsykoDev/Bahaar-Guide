@@ -1,0 +1,12 @@
+{
+    "name": "Bahaar-Guide",
+    "options": {
+        "niceName": "Bahaar-Guide",
+        "guiName": "Bahaar-Guide"
+    },
+    "author": "ZC",
+    "description": "Bahaar-Guide",
+    "servers": ["https://raw.githubusercontent.com/PsykoDev/Bahaar-Guide/master/"],
+    "supportUrl": "https://github.com/PsykoDev/Bahaar-Guide/issues",
+    "version": "90.02"
+}

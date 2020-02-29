@@ -1,0 +1,16 @@
+{
+	"files": {
+		"index.js": "496d7f9dc49341e196794c0d31cb0ce0b850f3f3355d216f4e0e848becc86b42",
+		"module.json": "d6c35e2421a218df1e2b67c99551dfd4a1b29bbfef7f27802ca110a90108f2fe"
+	},
+	"defs": {
+		"S_BOSS_GAGE_INFO": 3,
+		"S_ABNORMALITY_BEGIN": 4,
+		"S_ACTION_STAGE": 9,
+		"S_CHAT": 3,
+		"S_SPAWN_BUILD_OBJECT": 2,
+		"S_DESPAWN_BUILD_OBJECT": 2,
+		"S_SPAWN_COLLECTION": 4,
+		"S_DESPAWN_COLLECTION": 2
+	}
+}
