@@ -1,19 +1,25 @@
 const Vec3 = require('tera-vec3');
 const Baharr = {
 		103: {msg: 'Front (Dodge)'},
+		107: {msg: 'Hammer -> Knockback'},	
+		108: {msg: 'Back Throw (stun)'},
 		111: {msg: 'Back BIG Hammer'},
+		113: {msg: 'Bait (Dodge)'},
+		115: {msg: 'Knockup (sending flying)'},//114 115
+		117: {msg: 'Jump (Bait) (Knockdown)'},
 		139: {msg: 'Knockback!!'},
 		125: {msg: 'Front, LEFT safe, Back'},
 		131: {msg: 'Front, RIGHT safe, Back'},
 		308: {msg: '1st stun'},
 		309: {msg: '2nd stun'},
 		310: {msg: '3rd stun'},
-// 圆圈类
 		114: {msg: 'Front Slam'},
 		116: {msg: 'Donuts'},
 		112: {msg: 'Handle (Perfect block)'},
 		135: {msg: 'Handle (Perfect block)'},
-// 直线类
+		137: {msg: 'Back Hammer'},
+		138: {msg: 'Left hand powerhit (sending flying)'},//113 138		
+		139: {msg: 'Knockback!!'}, //108 110 139    118 139    101 105 107 139
 		101: {msg: 'Hammer (block) -> 270 -> Knockback'},
 		121: {msg: 'Waves (Left)'},
 		122: {msg: 'Waves (Left) 3rd fast'},
@@ -94,7 +100,7 @@ module.exports = function BahaarGuide(mod) {
 	
 	function sAbnormalityBegin(event) {
 		if (event.target != boss_GameID) return;
-		
+		if (event.id == 90442303) alertMessage('Healer should use [Regress] skill', 25);
 		if (event.id == 90442304) sendMessage("Stop the Boss using [Stun] skill", 25);
 		if (event.id == 90442000) shining = true;
 		if (event.id == 90442001) shining = false;
@@ -139,6 +145,28 @@ module.exports = function BahaarGuide(mod) {
 		sendMessage(Baharr[skillid].msg);
 		
 		switch (skillid) {
+			case 103:	// 前砸 103 104
+			case 125:	// 右前砸 125 126 127
+				SpawnThing(false, 184, 400, 100);
+				Spawnitem2(itemID1, 8, 350, 3000);
+				break;
+			case 131:	// 左前砸 131 132 134
+				SpawnThing(false, 182, 340, 100);
+				Spawnitem2(itemID1, 8, 660, 4000);
+				break;
+			case 126:	// 右后拉 125 126 127
+			case 132:	// 左后拉 131 132 134
+				Spawnitem1(itemID1, 180, 500, 2000);	// 对称轴 头部
+				Spawnitem1(itemID1, 0, 500, 2000);		// 对称轴 尾部
+				if (skillid === 126) {
+					SpawnThing(false, 90, 100, 100);		// 右后拉
+					}
+				if (skillid === 132) {
+					SpawnThing(false, 180, 100, 100);	// 左后拉
+					}
+				Spawnitem1(itemID1, 180, 500, 2000);
+				Spawnitem1(itemID1, 0, 500, 2000);
+				break;
 			case 114: // 点名后捶地
 				SpawnThing(   false,  100, 184, 260);
 				SpawnCircle(itemID1, 4000,  10, 320);
@@ -154,6 +182,11 @@ module.exports = function BahaarGuide(mod) {
 			case 101: // 锤地(三连击)
 				SpawnString(itemID1, 4000, 345, 500); // 对称轴 尾部
 				SpawnString(itemID1, 3000, 270, 500); // 对称轴 左侧
+				break;
+			case 111:	// 后砸 (慢慢慢慢)
+			case 137:	// 后砸
+				SpawnThing(false, 0, 500, 100);
+				Spawnitem2(itemID1, 8, 480, 2000);
 				break;
 			case 121: // 四连半月
 			case 122:
